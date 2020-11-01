@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - workflow-test
-  release:
-    types: [published]
+    paths:
+    - 'api/source/**'
+    - 'clients/extjs/**'
 
 jobs:
   push_to_registry:
