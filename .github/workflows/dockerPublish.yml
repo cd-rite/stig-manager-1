@@ -16,8 +16,6 @@ jobs:
         name: Check out the repo
         uses: actions/checkout@v2
           # Optionally: unshallow as a separate operation
-      - name: Unshallow
-        run: git fetch --prune --unshallow
       -
         name: Repo metadata
         id: repo
@@ -30,6 +28,7 @@ jobs:
         name: Prepare
         id: prep
         run: |
+          git fetch --prune --unshallow
           DOCKER_IMAGE=carlsmig/stig-manager-test
           BRANCH=$(git symbolic-ref --short HEAD)
           SHA=$(git rev-parse --short=10 HEAD)
