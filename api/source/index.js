@@ -20,6 +20,7 @@ const smFetch = require('./utils/fetchStigs')
 
 console.log(`Starting STIG Manager ${config.version}`)
 
+
 // Express config
 const app = express();
 app.use(upload.single('importFile'))
