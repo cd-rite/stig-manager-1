@@ -5,7 +5,6 @@ on:
       - workflow-test
     paths:
     - 'api/source/**'
-    - 'clients/extjs/**'
 
 jobs:
   test_api:
@@ -15,7 +14,36 @@ jobs:
       - 
         name: Check out the repo
         uses: actions/checkout@v2
-
+      -
+        name: Get image dependencies
+        id: image-dependencies
+        run: |
+          docker pull carlsmig/stig-manager-auth
+          docker pull mysql:8.0
+      -
+        name: Build API
+        id: build
+        run: |
+          docker build -t stig-manager -f test/Dockerile .
+      -
+        name: Orchestrate
+        id: Orchestrate
+        run: |
+          cd test
+          docker-compose up -d
+      -
+        name: Sleep for 45 seconds
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '45s'
+      -
+        name: cURL Test
+        id: curl
+        run: |
+          curl -v http://localhost:54000/api/user
+           
+         
+  
           
           
           

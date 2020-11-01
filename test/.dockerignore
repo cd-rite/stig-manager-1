@@ -1,0 +1,8 @@
+**/node_modules
+**/state.json
+**/README.md
+**/.git
+**/data
+**/docs
+**/uploads
+**/docker
