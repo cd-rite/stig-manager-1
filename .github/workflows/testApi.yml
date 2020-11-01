@@ -15,12 +15,6 @@ jobs:
         name: Check out the repo
         uses: actions/checkout@v2
       -
-        name: Get image dependencies
-        id: image-dependencies
-        run: |
-          docker pull carlsmig/stig-manager-auth
-          docker pull mysql:8.0
-      -
         name: Build API
         id: build
         run: |
