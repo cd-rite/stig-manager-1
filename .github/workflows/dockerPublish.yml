@@ -28,21 +28,16 @@ jobs:
         id: prep
         run: |
           DOCKER_IMAGE=carlsmig/stig-manager-test
-          VERSION=workflow-release
-          BRANCH=main
-          if [ "${{ github.event_name }}" = "release" ]; then
-          VERSION=manual-release
-          fi
-          if [[ $GITHUB_REF == refs/tags/* ]]; then
-            VERSION=${GITHUB_REF#refs/tags/}
-          fi
-          if [[ $GITHUB_REF == refs/heads/* ]]; then
-            BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed -r 's#/+#-#g')
-          fi
-          TAGS="${DOCKER_IMAGE}:latest,${DOCKER_IMAGE}:${VERSION}"
-          echo ::set-output name=version::${VERSION}
+          BRANCH=$(git symbolic-ref --short HEAD)
+          SHA=$(git rev-parse --short=10 HEAD)
+          DESCRIBE=$(git describe --tags)
+          TAG=$(git describe --tags --abbrev=0)
+          TAGS="${DOCKER_IMAGE}:latest,${DOCKER_IMAGE}:${TAG}"
+          echo ::set-output name=version::${TAG}
+          echo ::set-output name=tag::${TAG}
           echo ::set-output name=branch::${BRANCH}
           echo ::set-output name=tags::${TAGS}
+          echo ::set-output name=describe::${DESCRIBE}
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')                    
       - 
         name: Set up Docker Buildx
@@ -65,7 +60,7 @@ jobs:
           build-args: |
             COMMIT_BRANCH=${{ steps.prep.outputs.branch }}
             COMMIT_SHA=${{ github.sha }}
-            COMMIT_TAG=${{ steps.prep.outputs.tags }}
+            COMMIT_TAG=${{ steps.prep.outputs.tag }}
             COMMIT_DESCRIBE=Image built on ${{ steps.prep.outputs.created }}
 #           cache-from: type=registry,ref=myorg/myrepository:latest
 #           cache-to: type=inline
