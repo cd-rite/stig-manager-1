@@ -1,0 +1,27 @@
+name: Test API
+on:
+  push:
+    branches:
+      - workflow-test
+    paths:
+    - 'api/source/**'
+    - 'clients/extjs/**'
+
+jobs:
+  test_api:
+    name: Build production API and test
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        name: Check out the repo
+        uses: actions/checkout@v2
+
+          
+          
+          
+
+          
+          
+          
+          
+          
