@@ -18,7 +18,6 @@ jobs:
           # Optionally: unshallow as a separate operation
       - name: Unshallow
         run: git fetch --prune --unshallow
-
       -
         name: Repo metadata
         id: repo
@@ -65,7 +64,7 @@ jobs:
             COMMIT_BRANCH=${{ steps.prep.outputs.branch }}
             COMMIT_SHA=${{ github.sha }}
             COMMIT_TAG=${{ steps.prep.outputs.tag }}
-            COMMIT_DESCRIBE=Image built on ${{ steps.prep.outputs.created }}
+            COMMIT_DESCRIBE=${{ steps.prep.outputs.describe }}
 #           cache-from: type=registry,ref=myorg/myrepository:latest
 #           cache-to: type=inline
           tags: ${{ steps.prep.outputs.tags }}
@@ -76,7 +75,7 @@ jobs:
             org.opencontainers.image.source=${{ fromJson(steps.repo.outputs.result).clone_url }}
             org.opencontainers.image.version=${{ steps.prep.outputs.version }}
             org.opencontainers.image.created=${{ steps.prep.outputs.created }}
-            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.revision=${{ steps.prep.outputs.describe }}
             org.opencontainers.image.licenses=${{ fromJson(steps.repo.outputs.result).license.spdx_id }}
       -
         name: Image digest
