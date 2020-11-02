@@ -20,6 +20,7 @@ jobs:
         id: build
         run: |
           pwd
+          ls -l
           docker build -t stig-manager -f test/Dockerile .
       -
         name: Orchestrate
