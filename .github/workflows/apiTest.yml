@@ -38,7 +38,7 @@ jobs:
         name: cURL Test
         id: curl
         run: |
-          TOKEN="Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJGSjg2R2NGM2pUYk5MT2NvNE52WmtVQ0lVbWZZQ3FvcXRPUWVNZmJoTmxFIn0.eyJleHAiOjE2Mjc1MDQ2NzcsImlhdCI6MTU5NTk3MTU1NCwiYXV0aF90aW1lIjoxNTk1OTY4Njc3LCJqdGkiOiIzNGNkYmIwNC05ZGViLTRiZDUtYTgxYy05ZGM2M2I2ZDk5YjYiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXV0aC9yZWFsbXMvc3RpZ21hbiIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI0ZTM5NWIyZS02ZDg4LTQ1NDItYWM2YS04YjMyMjM2ZDNjYzMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJzdGlnLW1hbmFnZXIiLCJzZXNzaW9uX3N0YXRlIjoiNzEyMWEyMDItMmE3ZC00OTUzLWIzMTEtNjM2Y2QxNzZkYTYwIiwiYWNyIjoiMCIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgc3RpZy1tYW5hZ2VyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic3RpZ21hbmFkbWluIn0.hzReVfDjxTlOOG34xkyn8X_TbNZ_arhSGr3Gd7Fi4-IPfq2gZ3B2Ze18nD9GU6jyT42MEHy-hXdxN6LUSgkDJnmWoNKfaMSeTD1N28LD1XKS3KkW2ngtQFbMdGTRfD6Fj1HyPl3ZNkcT8uYcG1Ei0kdNDe5VYQ9_i9bIhnto_m4"
+          TOKEN="Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJGSjg2R2NGM2pUYk5MT2NvNE52WmtVQ0lVbWZZQ3FvcXRPUWVNZmJoTmxFIn0.eyJleHAiOjE2MDQ0MTA1NjYsImlhdCI6MTYwNDM0NTc2NiwiYXV0aF90aW1lIjoxNjA0MzQ1NzY2LCJqdGkiOiJmYjlhMTNjNC0wNjkxLTRmNmItYmI0My04ZDVmZThlMjU4NmUiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXV0aC9yZWFsbXMvc3RpZ21hbiIsImF1ZCI6InJlYWxtLW1hbmFnZW1lbnQiLCJzdWIiOiJiZjg3YTE2Zi0zOWU2LTQ2ZDktODk3MS1mMGVmNTFkZDNmODUiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJzdGlnLW1hbmFnZXIiLCJzZXNzaW9uX3N0YXRlIjoiMDYzYjg5ZTMtM2NhZC00MDc3LTkxNTktZjhhYThmZGY2OWJhIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJjcmVhdGVfY29sbGVjdGlvbiIsImFkbWluIiwidXNlciJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InJlYWxtLW1hbmFnZW1lbnQiOnsicm9sZXMiOlsidmlldy11c2VycyIsInF1ZXJ5LWdyb3VwcyIsInF1ZXJ5LXVzZXJzIl19fSwic2NvcGUiOiIiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJBZG1pbiBCdXJrZSIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6IkFkbWluIiwiZmFtaWx5X25hbWUiOiJCdXJrZSIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.AAar88Uf1glrmbZjiNa6Wv-0b177imVFBnKLpIYDmZO0OwzKWVWldsZnPd3GL7-yb24uZ8xpQYNeLSmqgn0qS2g0XJED5FHnOmn8T1xkw_5SH6xWkhoR4ibcDegRXj_OXRV4SzjlSsGhc2Dhu7IRyti9Xw50ml8rwSU9IaDmvKk"
 
           curl -l http://localhost:64001/api/user -H "accept: application/json" -H "$TOKEN"
 
@@ -50,7 +50,7 @@ jobs:
 
           curl -X GET "http://localhost:64001/api/stigs" -H "accept: application/json" -H "$TOKEN"
 
-          curl -X POST "http://localhost:64001/api/op/appdata?elevate=true" -H "accept: application/json" -H "$TOKEN" -H "Content-Type: multipart/form-data" -F "replace=true" -F "importFile=@test/appdata.json;type=text/xml"             
+          curl -X POST "http://localhost:64001/api/op/appdata?elevate=true" -H "accept: application/json" -H "$TOKEN" -H "Content-Type: multipart/form-data" -F "importFile=@test/appdata.json;type=application/json"
 
           curl -X GET "http://localhost:64001/api/collections?projection=owners&projection=statistics" -H "accept: application/json" -H "$TOKEN"
           
