@@ -27,4 +27,4 @@ services:
       - STIGMAN_DB_PASSWORD=stigman
     init: true
     ports:
-      - "54000:54000"
+      - "64001:54000"
