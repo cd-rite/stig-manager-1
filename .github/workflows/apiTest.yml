@@ -21,7 +21,7 @@ jobs:
         run: |
           pwd
           ls -l
-          docker build -t stig-manager -f test/Dockerfile .
+          docker build -t stig-manager -f ./test/Dockerfile .
       -
         name: Orchestrate
         id: Orchestrate
