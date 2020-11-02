@@ -19,6 +19,7 @@ jobs:
         name: Build API
         id: build
         run: |
+          pwd
           docker build -t stig-manager -f test/Dockerile .
       -
         name: Orchestrate
