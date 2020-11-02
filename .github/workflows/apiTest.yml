@@ -50,7 +50,7 @@ jobs:
 
           curl -X GET "http://localhost:64001/api/stigs" -H "accept: application/json" -H "$TOKEN"
 
-          curl -X POST "http://localhost:64001/api/op/appdata" -H "accept: application/json" -H "$TOKEN" -H "Content-Type: multipart/form-data" -F "replace=true" -F "importFile=@test/appdata.json;type=text/xml"             
+          curl -X POST "http://localhost:64001/api/op/appdata?elevate=true" -H "accept: application/json" -H "$TOKEN" -H "Content-Type: multipart/form-data" -F "replace=true" -F "importFile=@test/appdata.json;type=text/xml"             
 
           curl -X GET "http://localhost:64001/api/collections?projection=owners&projection=statistics" -H "accept: application/json" -H "$TOKEN"
           
