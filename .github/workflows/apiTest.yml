@@ -40,7 +40,7 @@ jobs:
         run: |
           TOKEN="Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJGSjg2R2NGM2pUYk5MT2NvNE52WmtVQ0lVbWZZQ3FvcXRPUWVNZmJoTmxFIn0.eyJleHAiOjE2Mjc1MDQ2NzcsImlhdCI6MTU5NTk3MTU1NCwiYXV0aF90aW1lIjoxNTk1OTY4Njc3LCJqdGkiOiIzNGNkYmIwNC05ZGViLTRiZDUtYTgxYy05ZGM2M2I2ZDk5YjYiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXV0aC9yZWFsbXMvc3RpZ21hbiIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI0ZTM5NWIyZS02ZDg4LTQ1NDItYWM2YS04YjMyMjM2ZDNjYzMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJzdGlnLW1hbmFnZXIiLCJzZXNzaW9uX3N0YXRlIjoiNzEyMWEyMDItMmE3ZC00OTUzLWIzMTEtNjM2Y2QxNzZkYTYwIiwiYWNyIjoiMCIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgc3RpZy1tYW5hZ2VyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic3RpZ21hbmFkbWluIn0.hzReVfDjxTlOOG34xkyn8X_TbNZ_arhSGr3Gd7Fi4-IPfq2gZ3B2Ze18nD9GU6jyT42MEHy-hXdxN6LUSgkDJnmWoNKfaMSeTD1N28LD1XKS3KkW2ngtQFbMdGTRfD6Fj1HyPl3ZNkcT8uYcG1Ei0kdNDe5VYQ9_i9bIhnto_m4"
           curl -l http://localhost:64001/api/user -H "accept: application/json" -H "$TOKEN"
-           
+          curl -X POST "http://localhost:64001/api/stigs" -H "accept: application/json" -H "$TOKEN" -H "Content-Type: multipart/form-data" -F "replace=true" -F "importFile=@test/stigs/U_VPN_SRG_V1R1_Manual-xccdf.xml;type=text/xml" 
          
   
           
