@@ -1,0 +1,50 @@
+name: Test API
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - workflow-test
+    paths:
+    - 'api/source/**'
+
+jobs:
+  test_api:
+    name: Build production API and test
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        name: Check out the repo
+        uses: actions/checkout@v2
+      -
+        name: Build API
+        id: build
+        run: |
+          docker build -t stig-manager -f test/Dockerile .
+      -
+        name: Orchestrate
+        id: Orchestrate
+        run: |
+          cd test
+          docker-compose up -d
+      -
+        name: Sleep for 45 seconds
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '45s'
+      -
+        name: cURL Test
+        id: curl
+        run: |
+          curl -v http://localhost:54000/api/user
+           
+         
+  
+          
+          
+          
+
+          
+          
+          
+          
+          

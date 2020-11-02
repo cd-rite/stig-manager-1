@@ -24,12 +24,33 @@ The web client is an OpenID Connect (OIDC) OAuth2 Relying Party and the API is a
 Keycloak is readily available, actively maintained by a major OSS vendor, supports Identity Brokering and User Federation, and is used by major DoD projects such as Air Force Iron Bank.
 Keycloak supports many External Identity Providers, but has only been tested using its own authentication. 
 
+LINK TO KEYCLOAK DOCS
+
 The following items in the Keycloak installation must be created and configured appropriately, and their values passed to STIG Manager in the appropriate Environment Variable: 
  * Keycloak Realm - `STIGMAN_CLIENT_KEYCLOAK_AUTH` suggested value: stigman
  * Client ID - `STIGMAN_CLIENT_KEYCLOAK_CLIENTID` suggested value: stig-manager
 
 Required Keycloak settings:
- * Client Scope - Required value: stig-manager (but check API Spec for full list)
+ * Roles - Create the following roles:
+   * admin
+   * user
+   * create_collection
+   * global_access
+ * Client Scopes - Create the following scopes, and assign them the specified roles:
+
+| **Client Scopes**             | **Roles** | 
+|-------------------------------|-----------|
+| `stig-manager:collection`      | admin<br>user<br>create_collection<br>global_access          |
+| `stig-manager:collection:read` | admin<br>user<br>create_collection<br>global_access          |
+| `stig-manager:op`              | admin          |
+| `stig-manager:op:read`         | admin          |
+| `stig-manager:stig`            | admin          |
+| `stig-manager:stig:read`       | admin<br>user<br>create_collection<br>global_access          |
+| `stig-manager:user`            | admin<br>user<br>create_collection<br>global_access          |
+| `stig-manager:user:read`       | admin<br>user<br>create_collection<br>global_access          |
+
+
+ * 
  * Authorization Code Flow with PKCE (Called "Standard Flow" in Keycloak)
  * Valid Redirect URIs - The address at which your users will access STIG Manager
  * Create these roles for users: user, admin, collectionCreator
@@ -49,7 +70,12 @@ Most commonly, STIG Manager will require the below Environment Variable to be sp
  * `STIGMAN_CLIENT_KEYCLOAK_REALM` - Sample value: stigman
  * `STIGMAN_CLIENT_KEYCLOAK_CLIENTID` - Sample value: stig-manager
 
-A sample Keycloak image, recommended only for testing purposes, is available on our [Docker Hub site.](https://hub.docker.com/r/carlsmig/stig-manager) Most of the default values for the above Environment variables will work with this image. 
+A sample Keycloak image, recommended only for testing purposes, is available on our [Docker Hub site.](https://hub.docker.com/repository/docker/nuwcdivnpt/stig-manager-auth) Most of the default values for the above Environment variables will work with this image. 
+
+### Add Users
+Don't forget to add at least your first STIGMan user when configuring KeyCloak. You can also configure Keycloak to auto-enroll users. 
+STIG Manager will automatically create it's own user associations for Collection grants once a KeyCloak authenticated user accesses the system. The privileges Admin, Collection Creator, and Global Access are managed in Keycloak with Roles. Specific Grants to Collections and Assets/STIGs are managed in the STIG Manager app.
+
 
 ### Database - MySQL 8.0.4+
 STIG Manager has been tested with MySQL 8.0.21.
@@ -65,6 +91,17 @@ Specify your MySQL DB with the following Environment Variables:
 `STIGMAN_DB_SCHEMA`
 `STIGMAN_DB_PASSWORD`
 
+TLS support
+LINK TO MYSQL DOCS
+
+`STIGMAN_DB_TLS_CA_FILE`
+`STIGMAN_DB_TLS_CERT_FILE`
+`STIGMAN_DB_TLS_KEY_FILE`
+
+https://github.com/NUWCDIVNPT/stig-manager-docker-compose
+
+
+
 ### Default Super User
 
 The first user in STIG Manager, which will be automatically created at first startup, and will have Administrator privileges in the app.
@@ -77,6 +114,9 @@ To add additional users to STIG Manager, they must be added both to Keycloak and
 
 The user administration process is currently being refactored.
 
+### First Steps
+Import STIGs.
+check admin quickstart guide
 
 ### Environment Variables
 
@@ -84,5 +124,5 @@ Check the [Environment Variables](Environment_Variables.md) document for an exha
 
 ## Container Information
 
-For more information, and a sample orchestration, please see our [Docker Hub site.](https://hub.docker.com/r/carlsmig/stig-manager)
+For more information, and a sample orchestration, please see our [Docker Hub site.](https://hub.docker.com/repository/docker/nuwcdivnpt/stig-manager)
 
