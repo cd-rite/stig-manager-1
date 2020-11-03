@@ -901,7 +901,7 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/collections/:collectionId/findings?aggregator=ruleId&acceptedOnly=false&projection=assets&projection=groups&projection=rules&projection=stigs&projection=ccis&projection=poamRarSummary",
+													"raw": "{{baseUrl}}/collections/:collectionId/findings?aggregator=ruleId&acceptedOnly=false&projection=assets&projection=groups&projection=rules&projection=stigs&projection=ccis",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -956,7 +956,8 @@
 														},
 														{
 															"key": "projection",
-															"value": "poamRarSummary"
+															"value": "poamRarSummary",
+															"disabled": true
 														}
 													],
 													"variable": [
@@ -1246,7 +1247,7 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/collections/:collectionId/findings?aggregator=groupId&acceptedOnly=false&projection=assets&projection=groups&projection=rules&projection=stigs&projection=ccis&projection=poamRarSummary",
+													"raw": "{{baseUrl}}/collections/:collectionId/findings?aggregator=groupId&acceptedOnly=false&projection=assets&projection=groups&projection=rules&projection=stigs&projection=ccis",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -1301,7 +1302,8 @@
 														},
 														{
 															"key": "projection",
-															"value": "poamRarSummary"
+															"value": "poamRarSummary",
+															"disabled": true
 														}
 													],
 													"variable": [
@@ -1591,7 +1593,7 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/collections/:collectionId/findings?aggregator=cci&acceptedOnly=false&projection=assets&projection=groups&projection=rules&projection=stigs&projection=ccis&projection=poamRarSummary",
+													"raw": "{{baseUrl}}/collections/:collectionId/findings?aggregator=cci&acceptedOnly=false&projection=assets&projection=groups&projection=rules&projection=stigs&projection=ccis",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -1646,7 +1648,8 @@
 														},
 														{
 															"key": "projection",
-															"value": "poamRarSummary"
+															"value": "poamRarSummary",
+															"disabled": true
 														}
 													],
 													"variable": [
@@ -1936,7 +1939,7 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/collections/:collectionId/findings?aggregator=ruleId&acceptedOnly=false&benchmarkId={{testBenchmark}}&projection=assets&projection=groups&projection=rules&projection=stigs&projection=ccis&projection=poamRarSummary",
+													"raw": "{{baseUrl}}/collections/:collectionId/findings?aggregator=ruleId&acceptedOnly=false&benchmarkId={{testBenchmark}}&projection=assets&projection=groups&projection=rules&projection=stigs&projection=ccis",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -1990,7 +1993,8 @@
 														},
 														{
 															"key": "projection",
-															"value": "poamRarSummary"
+															"value": "poamRarSummary",
+															"disabled": true
 														}
 													],
 													"variable": [
@@ -2280,7 +2284,7 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/collections/:collectionId/findings?aggregator=ruleId&acceptedOnly=false&assetId={{testAsset}}&projection=assets&projection=groups&projection=rules&projection=stigs&projection=ccis&projection=poamRarSummary",
+													"raw": "{{baseUrl}}/collections/:collectionId/findings?aggregator=ruleId&acceptedOnly=false&assetId={{testAsset}}&projection=assets&projection=groups&projection=rules&projection=stigs&projection=ccis",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -2334,7 +2338,8 @@
 														},
 														{
 															"key": "projection",
-															"value": "poamRarSummary"
+															"value": "poamRarSummary",
+															"disabled": true
 														}
 													],
 													"variable": [
@@ -2994,6 +2999,18 @@
 											]
 										}
 									],
+									"protocolProfileBehavior": {},
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "poam",
+									"item": [],
+									"protocolProfileBehavior": {},
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "status",
+									"item": [],
 									"protocolProfileBehavior": {},
 									"_postman_isSubFolder": true
 								},
@@ -15088,10 +15105,10 @@
 													"let userKeys = [\r",
 													"    \"userId\",\r",
 													"    \"username\",\r",
-													"    \"display\",\r",
-													"    \"email\",\r",
-													"    \"metadata\",\r",
-													"    \"privileges\",\r",
+													"    // \"display\",\r",
+													"    // \"email\",\r",
+													"    // \"metadata\",\r",
+													"    // \"privileges\",\r",
 													"    \"collectionGrants\",\r",
 													"    \"statistics\"\r",
 													"]\r",
@@ -15110,7 +15127,9 @@
 													"]\r",
 													"let statisticsKeys = [\r",
 													"    \"created\",\r",
-													"    \"lastAccess\"\r",
+													"    \"lastAccess\",\r",
+													"    \"collectionGrantCount\",\r",
+													"    \"lastClaims\"\r",
 													"]\r",
 													"let privilegesKeys = [\r",
 													"    \"canAdmin\",\r",
@@ -15128,9 +15147,9 @@
 													"    pm.expect(grant.collection).to.have.all.keys(collectionKeys);\r",
 													"}\r",
 													"\r",
-													"pm.test(\"Check if object contains all required privileges keys\", function () {\r",
-													"    pm.expect(jsonData.privileges).to.have.all.keys(privilegesKeys);\r",
-													"});\r",
+													"// pm.test(\"Check if object contains all required privileges keys\", function () {\r",
+													"//     pm.expect(jsonData.privileges).to.have.all.keys(privilegesKeys);\r",
+													"// });\r",
 													"\r",
 													"pm.test(\"Check if object contains all required statistics keys\", function () {\r",
 													"    pm.expect(jsonData.statistics).to.have.all.keys(statisticsKeys);\r",
@@ -15153,7 +15172,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/users/:userId?elevate={{elevated}}&projection=collectionGrants&projection=privileges&projection=statistics",
+											"raw": "{{baseUrl}}/users/:userId?elevate={{elevated}}&projection=collectionGrants&projection=statistics",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -15175,7 +15194,8 @@
 												{
 													"key": "projection",
 													"value": "privileges",
-													"description": "Additional properties to include in the response.\n"
+													"description": "Additional properties to include in the response.\n",
+													"disabled": true
 												},
 												{
 													"key": "projection",
@@ -15335,10 +15355,10 @@
 											"let userKeys = [\r",
 											"    \"userId\",\r",
 											"    \"username\",\r",
-											"    \"display\",\r",
-											"    \"email\",\r",
-											"    \"metadata\",\r",
-											"    \"privileges\",\r",
+											"    // \"display\",\r",
+											"    // \"email\",\r",
+											"    // \"metadata\",\r",
+											"    // \"privileges\",\r",
 											"    \"collectionGrants\",\r",
 											"    \"statistics\"\r",
 											"]\r",
@@ -15357,7 +15377,9 @@
 											"]\r",
 											"let statisticsKeys = [\r",
 											"    \"created\",\r",
-											"    \"lastAccess\"\r",
+											"    \"lastAccess\",\r",
+											"    \"collectionGrantCount\",\r",
+											"    \"lastClaims\"\r",
 											"]\r",
 											"let privilegesKeys = [\r",
 											"    \"canAdmin\",\r",
@@ -15391,9 +15413,9 @@
 											"            pm.expect(grant.collection).to.have.all.keys(collectionKeys);\r",
 											"        }\r",
 											"\r",
-											"        pm.test(\"Check if object contains all required privileges keys\", function () {\r",
-											"            pm.expect(user.privileges).to.have.all.keys(privilegesKeys);\r",
-											"        });\r",
+											"        // pm.test(\"Check if object contains all required privileges keys\", function () {\r",
+											"        //     pm.expect(user.privileges).to.have.all.keys(privilegesKeys);\r",
+											"        // });\r",
 											"\r",
 											"        pm.test(\"Check if object contains all required statistics keys\", function () {\r",
 											"            pm.expect(user.statistics).to.have.all.keys(statisticsKeys);\r",
@@ -15416,7 +15438,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/users?elevate={{elevated}}&projection=collectionGrants&projection=privileges&projection=statistics",
+									"raw": "{{baseUrl}}/users?elevate={{elevated}}&projection=collectionGrants&projection=statistics",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -15443,7 +15465,8 @@
 										{
 											"key": "projection",
 											"value": "privileges",
-											"description": "Additional properties to include in the response.\n"
+											"description": "Additional properties to include in the response.\n",
+											"disabled": true
 										},
 										{
 											"key": "projection",
@@ -15587,10 +15610,10 @@
 											"let userKeys = [\r",
 											"    \"userId\",\r",
 											"    \"username\",\r",
-											"    \"display\",\r",
-											"    \"email\",\r",
-											"    \"metadata\",\r",
-											"    \"privileges\",\r",
+											"    // \"display\",\r",
+											"    // \"email\",\r",
+											"    // \"metadata\",\r",
+											"    // \"privileges\",\r",
 											"    \"collectionGrants\",\r",
 											"    \"statistics\"\r",
 											"]\r",
@@ -15609,7 +15632,9 @@
 											"]\r",
 											"let statisticsKeys = [\r",
 											"    \"created\",\r",
-											"    \"lastAccess\"\r",
+											"    \"lastAccess\",\r",
+											"    \"collectionGrantCount\",\r",
+											"    \"lastClaims\"\r",
 											"]\r",
 											"let privilegesKeys = [\r",
 											"    \"canAdmin\",\r",
@@ -15643,9 +15668,9 @@
 											"            pm.expect(grant.collection).to.have.all.keys(collectionKeys);\r",
 											"        }\r",
 											"\r",
-											"        pm.test(\"Check if object contains all required privileges keys\", function () {\r",
-											"            pm.expect(user.privileges).to.have.all.keys(privilegesKeys);\r",
-											"        });\r",
+											"        // pm.test(\"Check if object contains all required privileges keys\", function () {\r",
+											"        //     pm.expect(user.privileges).to.have.all.keys(privilegesKeys);\r",
+											"        // });\r",
 											"\r",
 											"        pm.test(\"Check if object contains all required statistics keys\", function () {\r",
 											"            pm.expect(user.statistics).to.have.all.keys(statisticsKeys);\r",
@@ -15668,7 +15693,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/users?elevate={{elevated}}&username={{testUser}}&projection=collectionGrants&projection=privileges&projection=statistics",
+									"raw": "{{baseUrl}}/users?elevate={{elevated}}&username={{testUser}}&projection=collectionGrants&projection=statistics",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -15694,7 +15719,8 @@
 										{
 											"key": "projection",
 											"value": "privileges",
-											"description": "Additional properties to include in the response.\n"
+											"description": "Additional properties to include in the response.\n",
+											"disabled": true
 										},
 										{
 											"key": "projection",
@@ -16043,10 +16069,10 @@
 									"let userKeys = [\r",
 									"    \"userId\",\r",
 									"    \"username\",\r",
-									"    \"display\",\r",
-									"    \"email\",\r",
-									"    \"metadata\",\r",
-									"    \"privileges\",\r",
+									"    // \"display\",\r",
+									"    // \"email\",\r",
+									"    // \"metadata\",\r",
+									"    // \"privileges\",\r",
 									"    \"collectionGrants\",\r",
 									"    \"statistics\"\r",
 									"]\r",
@@ -16064,7 +16090,9 @@
 									"]\r",
 									"let statisticsKeys = [\r",
 									"    \"created\",\r",
-									"    \"lastAccess\"\r",
+									"    \"lastAccess\",\r",
+									"    \"collectionGrantCount\",\r",
+									"    \"lastClaims\"\r",
 									"]\r",
 									"let privilegesKeys = [\r",
 									"    \"canAdmin\",\r",
@@ -25937,7 +25965,7 @@
 	],
 	"variable": [
 		{
-			"id": "2f0668e7-2678-4cd5-9311-f4c44b7d9e39",
+			"id": "e04c26ea-108e-434c-968c-ec92f0b71376",
 			"key": "baseUrl",
 			"value": "http://localhost:64001/api"
 		}
