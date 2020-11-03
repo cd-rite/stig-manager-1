@@ -3083,9 +3083,10 @@
 													"\r",
 													"let ownerKeys = [\r",
 													"    \"userId\",\r",
-													"    \"username\",\r",
-													"    \"display\",\r",
-													"    \"email\"\r",
+													"    \"username\"\r",
+													"    // ,\r",
+													"    // \"display\",\r",
+													"    // \"email\"\r",
 													"]\r",
 													"\r",
 													"let statisticsKeys = [\r",
@@ -5150,9 +5151,10 @@
 											"",
 											"let ownerKeys = [",
 											"    \"userId\",",
-											"    \"username\",",
-											"    \"display\",",
-											"    \"email\"",
+											"    \"username\"",
+											"    // ,",
+											"    // \"display\",",
+											"    // \"email\"",
 											"]",
 											"",
 											"let statisticsKeys = [",
@@ -25965,7 +25967,7 @@
 	],
 	"variable": [
 		{
-			"id": "e04c26ea-108e-434c-968c-ec92f0b71376",
+			"id": "6f1aa733-f537-4827-9f21-5141af82cc33",
 			"key": "baseUrl",
 			"value": "http://localhost:64001/api"
 		}
